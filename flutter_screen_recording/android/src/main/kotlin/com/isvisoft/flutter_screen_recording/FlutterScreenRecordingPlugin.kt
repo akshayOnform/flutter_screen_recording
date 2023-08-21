@@ -65,6 +65,7 @@ class FlutterScreenRecordingPlugin(
                 mMediaProjection = mProjectionManager?.getMediaProjection(resultCode, data!!)
                 mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
                 mVirtualDisplay = createVirtualDisplay()
+                mMediaRecorder?.start()
                 _result.success(true)
                 return true
             } else {
@@ -197,7 +198,7 @@ class FlutterScreenRecordingPlugin(
             mMediaRecorder?.setVideoFrameRate(60)
 
             mMediaRecorder?.prepare()
-            mMediaRecorder?.start()
+
         } catch (e: IOException) {
             Log.d("--INIT-RECORDER", e.message+"")
             println("Error startRecordScreen")
