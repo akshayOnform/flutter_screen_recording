@@ -67,9 +67,9 @@ class FlutterScreenRecordingPlugin(
                 mMediaProjection = mProjectionManager?.getMediaProjection(resultCode, data!!)
                 mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
                 mVirtualDisplay = createVirtualDisplay()
-                mMediaRecorder?.start()
                 //adding delay of 500 milliseonds
                 Handler(Looper.getMainLooper()).postDelayed({
+                    mMediaRecorder?.start()
                     _result.success(true)
                 }, 500)
                 return true
