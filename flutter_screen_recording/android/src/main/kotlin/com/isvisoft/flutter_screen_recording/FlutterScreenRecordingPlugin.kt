@@ -24,6 +24,8 @@ import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugin.common.PluginRegistry.Registrar
 import java.io.File
 import java.io.IOException
+import android.os.Handler
+import android.os.Looper
 
 import com.foregroundservice.ForegroundService
 
@@ -66,7 +68,10 @@ class FlutterScreenRecordingPlugin(
                 mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
                 mVirtualDisplay = createVirtualDisplay()
                 mMediaRecorder?.start()
-                _result.success(true)
+                //adding delay of 500 milliseonds
+                Handler(Looper.getMainLooper()).postDelayed({
+                    _result.success(true)
+                }, 500)
                 return true
             } else {
                 ForegroundService.stopService(registrar.context())
