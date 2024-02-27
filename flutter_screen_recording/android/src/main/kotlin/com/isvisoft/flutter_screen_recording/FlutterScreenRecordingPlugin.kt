@@ -38,7 +38,7 @@ class FlutterScreenRecordingPlugin(
     var mMediaRecorder: MediaRecorder? = null
     var mProjectionManager: MediaProjectionManager? = null
     var mMediaProjection: MediaProjection? = null
-    var mMediaProjectionCallback: MediaProjectionCallback? = null
+    lateinit var mMediaProjectionCallback: MediaProjectionCallback
     var mVirtualDisplay: VirtualDisplay? = null
     var mDisplayWidth: Int = 1280
     var mDisplayHeight: Int = 800
