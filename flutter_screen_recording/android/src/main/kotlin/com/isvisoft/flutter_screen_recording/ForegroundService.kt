@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.isvisoft.flutter_screen_recording.FlutterScreenRecordingPlugin
 import com.isvisoft.flutter_screen_recording.R
-
+import android.content.pm.ServiceInfo
 
 class ForegroundService : Service() {
     private val CHANNEL_ID = "ForegroundService Kotlin"
@@ -43,7 +43,13 @@ class ForegroundService : Service() {
                 .setSmallIcon(R.drawable.icon)
                 .setContentIntent(pendingIntent)
                 .build()
-        startForeground(1, notification)
+        if (Build.VERSION.SDK_INT > 28)
+            startForeground(
+                1,
+                notification,
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION)
+        else
+            startForeground(1, notification)
 
         return START_NOT_STICKY
     }

@@ -63,12 +63,13 @@ class FlutterScreenRecordingPlugin(
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
         if (requestCode == SCREEN_RECORD_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                mMediaProjectionCallback = MediaProjectionCallback()
-                mMediaProjection = mProjectionManager?.getMediaProjection(resultCode, data!!)
-                mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
-                mVirtualDisplay = createVirtualDisplay()
+                ForegroundService.startService(registrar.context(), "Your screen is being recorded")
                 //adding delay of 500 milliseonds
                 Handler(Looper.getMainLooper()).postDelayed({
+                    mMediaProjectionCallback = MediaProjectionCallback()
+                    mMediaProjection = mProjectionManager?.getMediaProjection(resultCode, data!!)
+                    mMediaProjection?.registerCallback(mMediaProjectionCallback, null)
+                    mVirtualDisplay = createVirtualDisplay()
                     mMediaRecorder?.start()
                     _result.success(true)
                 }, 500)
@@ -86,7 +87,6 @@ class FlutterScreenRecordingPlugin(
             try {
 
                 _result = result
-                ForegroundService.startService(registrar.context(), "Your screen is being recorded")
                 mProjectionManager = registrar.context().applicationContext.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager?
 
                 val metrics = DisplayMetrics()
