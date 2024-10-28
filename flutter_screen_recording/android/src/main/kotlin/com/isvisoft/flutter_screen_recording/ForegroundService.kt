@@ -40,7 +40,7 @@ class ForegroundService : Service() {
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Onform")
                 .setContentText(input)
-                .setSmallIcon(R.drawable.icon)
+                //.setSmallIcon(R.drawable.icon)
                 .setContentIntent(pendingIntent)
                 .build()
         if (Build.VERSION.SDK_INT > 28)

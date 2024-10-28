@@ -42,10 +42,10 @@ class FlutterScreenRecording {
     return path;
   }
 
-  static  _maybeStartFGS(String titleNotification, String messageNotification) async {
+  static  _maybeStartFGS(String titleNotification, String messageNotification) {
     if (!kIsWeb && Platform.isAndroid) {
 
-      await FlutterForegroundTask.init(
+      FlutterForegroundTask.init(
         androidNotificationOptions: AndroidNotificationOptions(
           channelId: 'notification_channel_id',
           channelName: titleNotification,
@@ -71,7 +71,7 @@ class FlutterScreenRecording {
           autoRunOnBoot: true,
           allowWifiLock: true,
         ),
-        printDevLog: true,
+        //printDevLog: true,
       );
     }
   }
